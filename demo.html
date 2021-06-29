@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Apple</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="movable.css">
+  <style>
+    :root {
+      --red: #da0000;
+      --yellow: #f7f700;
+      --green: #047704;
+    }
+
+    .apples {
+      display: flex;
+    }
+
+    c-apple {
+      position: relative;
+    }
+
+    .apples > c-apple {
+      margin-right: 1rem;
+    }
+
+    .apples > c-apple:last-child {
+      margin-right: 0;
+    }
+  </style>
+  <script type="module">
+    import { Apple } from './Apple.js'
+    import { WormHole } from './WormHole.js'
+    import { initMovable2, movable } from "./movable.js";
+
+    customElements.define('c-apple', Apple)
+    customElements.define('c-worm-hole', WormHole)
+    initMovable2()
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const apple = document.getElementsByTagName('c-apple')[2]
+      movable(apple)
+    })
+  </script>
+</head>
+<body>
+  <div class="apples">
+    <c-apple color="var(--red)" movable>
+      <c-worm-hole style="position: absolute; left: calc(70% - 12px); top: calc(70% - 12px);"></c-worm-hole>
+    </c-apple>
+    <c-apple color="var(--yellow)" movable></c-apple>
+    <c-apple color="var(--green)"></c-apple>
+  </div>
+</body>
+</html>
